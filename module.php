@@ -360,6 +360,3 @@ class TwilioModule extends AApiModule
 		return $aResult;
 	}	
 }
-
-
-// test
