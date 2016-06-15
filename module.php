@@ -6,12 +6,12 @@ class TwilioModule extends AApiModule
 		parent::init();
 		
 		$this->setObjectMap('CTenant', array(
-				'TwilioAllow'				=> array('bool', false, false), //, !!$oSettings->GetConf('Twilio/AllowTwilio')
+				'TwilioAllow'				=> array('bool', !!$this->GetConfig('Allow'), false), //, 
 				'TwilioAllowConfiguration'	=> array('bool', false),
-				'TwilioPhoneNumber'			=> array('string', '', false), //, (string) $oSettings->GetConf('Twilio/PhoneNumber')
-				'TwilioAccountSID'			=> array('string', '', false), //, (string) $oSettings->GetConf('Twilio/AccountSID')
-				'TwilioAuthToken'			=> array('string', '', false), //(string) $oSettings->GetConf('Twilio/AuthToken')
-				'TwilioAppSID'				=> array('string', '', false) //(string) $oSettings->GetConf('Twilio/AppSID')
+				'TwilioPhoneNumber'			=> array('string', (string) $this->GetConfig('PhoneNumber'), false),
+				'TwilioAccountSID'			=> array('string', (string) $this->GetConfig('AccountSID'), false),
+				'TwilioAuthToken'			=> array('string', (string) $this->GetConfig('AuthToken'), false),
+				'TwilioAppSID'				=> array('string', (string) $this->GetConfig('AppSID'), false)
 			)
 		);
 		
