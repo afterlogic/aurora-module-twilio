@@ -28,9 +28,9 @@ class TwilioModule extends AApiModule
 	public function getTwiML()
 	{
 		$aPaths = \System\Service::GetPaths();
-		$oApiCapability = \CApi::GetCoreManager('capability');
-		$oApiUsers = \CApi::GetCoreManager('users');
-		$oApiTenants = \CApi::GetCoreManager('tenants');
+		$oApiCapability = \CApi::GetSystemManager('capability');
+		$oApiUsers = \CApi::GetSystemManager('users');
+		$oApiTenants = \CApi::GetSystemManager('tenants');
 
 		$sTenantId = isset($aPaths[1]) ? $aPaths[1] : null;
 		$oTenant = null;
@@ -165,7 +165,7 @@ class TwilioModule extends AApiModule
 	{
 		$oAccount = $this->getAccountFromParam();
 
-		$oApiTenants = \CApi::GetCoreManager('tenants');
+		$oApiTenants = \CApi::GetSystemManager('tenants');
 		$oTenant = (0 < $oAccount->IdTenant) ? $oApiTenants->getTenantById($oAccount->IdTenant) : $oApiTenants->getDefaultGlobalTenant();
 		
 		$mToken = false;
@@ -235,7 +235,7 @@ class TwilioModule extends AApiModule
 
 		$bTwilioEnable = $oAccount->User->TwilioEnable;
 
-		$oApiTenants = \CApi::GetCoreManager('tenants');
+		$oApiTenants = \CApi::GetSystemManager('tenants');
 		$oTenant = (0 < $oAccount->IdTenant) ? $oApiTenants->getTenantById($oAccount->IdTenant) :
 			$this->oApiTenants->getDefaultGlobalTenant();
 
