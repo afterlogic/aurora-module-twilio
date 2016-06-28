@@ -163,6 +163,7 @@ class TwilioModule extends AApiModule
 	 */
 	public function GetToken()
 	{
+		return false; // TODO:
 		$oAccount = $this->getAccountFromParam();
 
 		$oApiTenants = \CApi::GetSystemManager('tenants');
@@ -231,6 +232,8 @@ class TwilioModule extends AApiModule
 	 */
 	public function GetLogs()
 	{
+		return array(); // TODO:
+		
 		$oAccount = $this->getAccountFromParam();
 
 		$bTwilioEnable = $oAccount->User->TwilioEnable;
