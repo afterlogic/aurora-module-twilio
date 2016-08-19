@@ -221,7 +221,7 @@ class TwilioModule extends AApiModule
 		}
 		else
 		{
-			throw new \System\Exceptions\ClientException(\System\Notifications::VoiceNotAllowed);
+			throw new \System\Exceptions\AuroraApiException(\System\Notifications::VoiceNotAllowed);
 		}
 
 		return $mToken;
@@ -357,7 +357,7 @@ class TwilioModule extends AApiModule
 		}
 		else
 		{
-			throw new \System\Exceptions\ClientException(\System\Notifications::VoiceNotAllowed);
+			throw new \System\Exceptions\AuroraApiException(\System\Notifications::VoiceNotAllowed);
 		}
 
 		return $aResult;
