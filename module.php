@@ -163,6 +163,8 @@ class TwilioModule extends AApiModule
 	 */
 	public function GetToken()
 	{
+		\CApi::checkUserRoleIsAtLeast(\EUserRole::Anonymous);
+		
 		return false; // TODO:
 		$oAccount = $this->getAccountFromParam();
 
@@ -232,6 +234,8 @@ class TwilioModule extends AApiModule
 	 */
 	public function GetLogs()
 	{
+		\CApi::checkUserRoleIsAtLeast(\EUserRole::Anonymous);
+		
 		return array(); // TODO:
 		
 		$oAccount = $this->getAccountFromParam();
