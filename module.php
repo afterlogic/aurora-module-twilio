@@ -172,7 +172,7 @@ class TwilioModule extends AApiModule
 		$oTenant = (0 < $oAccount->IdTenant) ? $oApiTenants->getTenantById($oAccount->IdTenant) : $oApiTenants->getDefaultGlobalTenant();
 		
 		$mToken = false;
-		if ($oTenant && $this->oApiCapabilityManager->isTwilioSupported($oAccount) && $oTenant->isTwilioSupported() && $oTenant->TwilioAllow && $oAccount->User->TwilioEnable && file_exists(PSEVEN_APP_ROOT_PATH.'libraries/Services/Twilio.php'))
+		if ($oTenant && $this->oApiCapabilityManager->isTwilioSupported($oAccount) && $oTenant->isTwilioSupported() && $oTenant->TwilioAllow && $oAccount->User->TwilioEnable && file_exists(AURORA_APP_ROOT_PATH.'libraries/Services/Twilio.php'))
 		{
 			try
 			{
@@ -250,7 +250,7 @@ class TwilioModule extends AApiModule
 		{
 			try
 			{
-				include PSEVEN_APP_ROOT_PATH.'libraries/Services/Twilio.php';
+				include AURORA_APP_ROOT_PATH.'libraries/Services/Twilio.php';
 
 				$sStatus = (string) $this->getParamValue('Status', '');
 				$sStartTime = (string) $this->getParamValue('StartTime', '');
