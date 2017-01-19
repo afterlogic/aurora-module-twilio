@@ -1,7 +1,22 @@
 {
-	"Allow": true,
-	"PhoneNumber": "",
-	"AccountSID": "",
-	"AuthToken": "",
-	"AppSID": ""
+	"Disabled": [
+		false,
+		"bool"
+	],
+	"PhoneNumber": [
+		"",
+		"string"
+	],
+	"AccountSID": [
+		"",
+		"string"
+	],
+	"AuthToken": [
+		"",
+		"string"
+	],
+	"AppSID": [
+		"",
+		"string"
+	]
 }
