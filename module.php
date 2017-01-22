@@ -5,7 +5,7 @@ class TwilioModule extends AApiModule
 	public function init() {
 		parent::init();
 		
-		$this->setObjectMap('CTenant', array(
+		$this->extendObject('CTenant', array(
 				'TwilioAllow'				=> array('bool', !!$this->GetConfig('Allow'), false), //, 
 				'TwilioAllowConfiguration'	=> array('bool', false),
 				'TwilioPhoneNumber'			=> array('string', (string) $this->GetConfig('PhoneNumber'), false),
@@ -15,7 +15,7 @@ class TwilioModule extends AApiModule
 			)
 		);
 		
-		$this->setObjectMap('CUser', array(
+		$this->extendObject('CUser', array(
 				'TwilioEnable'						=> array('bool', true), //'twilio_enable'),
 				'TwilioNumber'						=> array('string', ''), //'twilio_number'),
 				'TwilioDefaultNumber'				=> array('bool', false), //'twilio_default_number'),
