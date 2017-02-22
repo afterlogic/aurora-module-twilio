@@ -1,8 +1,11 @@
 <?php
 
-class TwilioModule extends AApiModule
+namespace Aurora\Modules;
+
+class TwilioModule extends \AApiModule
 {
-	public function init() {
+	public function init() 
+	{
 		parent::init();
 		
 		$this->extendObject('CTenant', array(
@@ -56,17 +59,17 @@ class TwilioModule extends AApiModule
 		{
 			if ($this->oHttp->GetRequest('AfterlogicCall')) //internal call from webmail first occurrence
 			{
-				if (preg_match("/^[\d\+\-\(\) ]+$/", $sTo) && strlen($sTo) > 0 && strlen($sTo) < 10) //to internal number
+				if (\preg_match("/^[\d\+\-\(\) ]+$/", $sTo) && \strlen($sTo) > 0 && \strlen($sTo) < 10) //to internal number
 				{
 					$aResult[] = '<Dial callerId="'.$sFrom.'"><Client>'.$sTo.'</Client></Dial>';
 				}
-				else if (strlen($sTo) > 10) //to external number
+				else if (\strlen($sTo) > 10) //to external number
 				{
 					$aResult[] = '<Dial callerId="'.$sFrom.'">'.$sTo.'</Dial>';
 				}
 
 				//@setcookie('twilioCall['.$oHttp->GetRequest('CallSid').']', $sTo, time()+60);
-				@setcookie('PhoneNumber', $sTo);
+				@\setcookie('PhoneNumber', $sTo);
 			}
 			else //call from other systems or internal call second occurrence
 			{
@@ -74,11 +77,11 @@ class TwilioModule extends AApiModule
 				{
 					/*$sTo = isset($_COOKIE['twilioCall'][$oHttp->GetRequest('CallSid')]) ? $_COOKIE['twilioCall'][$oHttp->GetRequest('CallSid')] : '';
 					@setcookie ('twilioCall['.$oHttp->GetRequest('CallSid').']', '', time() - 1);*/
-					if (strlen($sTo) > 0 && strlen($sTo) < 10) //to internal number
+					if (\strlen($sTo) > 0 && \strlen($sTo) < 10) //to internal number
 					{
 						$aResult[] = '<Dial callerId="'.$sFrom.'"><Client>'.$sTo.'</Client></Dial>';
 					}
-					else if (strlen($sTo) > 10) //to external number
+					else if (\strlen($sTo) > 10) //to external number
 					{
 						$aResult[] = '<Dial callerId="'.$sTwilioPhoneNumber.'">'.$sTo.'</Dial>'; //in there caller id must be full with country code number!
 					}
@@ -118,7 +121,7 @@ class TwilioModule extends AApiModule
 		\CApi::LogObject('twilio_xml_end');
 
 		//return implode("\r\n", $aResult);
-		return implode('', $aResult);
+		return \implode('', $aResult);
 	}
 
 	public function getCallSimpleStatus($sStatus, $sUserDirection)
@@ -208,7 +211,7 @@ class TwilioModule extends AApiModule
 					{
 						$oCapability->allowClientIncoming(strlen($sUserPhoneNumber) > 0 ? $sUserPhoneNumber : 'default');
 					}
-					else if (strlen($sUserPhoneNumber) > 0)
+					else if (\strlen($sUserPhoneNumber) > 0)
 					{
 						$oCapability->allowClientIncoming($sUserPhoneNumber);
 					}

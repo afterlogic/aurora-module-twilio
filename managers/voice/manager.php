@@ -40,8 +40,8 @@ class CApiVoiceManager extends AApiManager
 	{
 		parent::__construct('voice', $oManager);
 
-		$this->oApiContactsManager = CApi::Manager('contactsmain');
-		$this->oApiGContactsManager = CApi::Manager('gcontacts');
+		$this->oApiContactsManager =\CApi::Manager('contactsmain');
+		$this->oApiGContactsManager =\CApi::Manager('gcontacts');
 	}
 
 	/**
@@ -59,8 +59,8 @@ class CApiVoiceManager extends AApiManager
 	public function flushCallersNumbersCache($iIdUser)
 	{
 		$sCacheKey = $this->_generateCacheFileName($iIdUser);
-		$oApiFileCache = /* @var $oApiFileCache \CApiFilecacheManager */ CApi::GetSystemManager('filecache');
-		$oApiUsers = /* @var $oApiUsers \CApiUsersManager */ CApi::GetSystemManager('users');
+		$oApiFileCache = /* @var $oApiFileCache \CApiFilecacheManager */\CApi::GetSystemManager('filecache');
+		$oApiUsers = /* @var $oApiUsers \CApiUsersManager */\CApi::GetSystemManager('users');
 		
 		if ($oApiFileCache && $oApiUsers && !empty($sCacheKey))
 		{
@@ -82,13 +82,13 @@ class CApiVoiceManager extends AApiManager
 	public function getNamesByCallersNumbers($oAccount, $aNumbers, $bUseCache = true)
 	{
 		$mResult = false;
-		$oApiContactsManager = CApi::Manager('contactsmain');
+		$oApiContactsManager =\CApi::Manager('contactsmain');
 		if (is_array($aNumbers) && 0 < count($aNumbers) && $oAccount && $oApiContactsManager)
 		{
 			$bFromCache = false;
 			$sCacheKey = '';
 			$mNamesResult = null;
-			$oApiFileCache = $bUseCache ? /* @var $oApiFileCache \CApiFilecacheManager */ CApi::GetSystemManager('filecache') : false;
+			$oApiFileCache = $bUseCache ? /* @var $oApiFileCache \CApiFilecacheManager */\CApi::GetSystemManager('filecache') : false;
 			if ($oApiFileCache)
 			{
 				$sCacheKey = $this->_generateCacheFileName($oAccount->IdUser);
