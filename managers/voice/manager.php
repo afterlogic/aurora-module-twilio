@@ -21,7 +21,7 @@
 /**
  * @package Voice
  */
-class CApiVoiceManager extends AApiManager
+class CApiVoiceManager extends \Aurora\System\AbstractManager
 {
 	/**
 	 * @var $oApiContactsManager CApiContactsContactsManager
@@ -34,14 +34,14 @@ class CApiVoiceManager extends AApiManager
 	private $oApiGContactsManager;
 
 	/**
-	 * @param CApiGlobalManager &$oManager
+	 * @param \Aurora\System\GlobalManager &$oManager
 	 */
-	public function __construct(CApiGlobalManager &$oManager, $sForcedStorage = '')
+	public function __construct(\Aurora\System\GlobalManager &$oManager, $sForcedStorage = '')
 	{
 		parent::__construct('voice', $oManager);
 
-		$this->oApiContactsManager =\CApi::Manager('contactsmain');
-		$this->oApiGContactsManager =\CApi::Manager('gcontacts');
+		$this->oApiContactsManager =\Aurora\System\Api::Manager('contactsmain');
+		$this->oApiGContactsManager =\Aurora\System\Api::Manager('gcontacts');
 	}
 
 	/**
@@ -59,8 +59,8 @@ class CApiVoiceManager extends AApiManager
 	public function flushCallersNumbersCache($iIdUser)
 	{
 		$sCacheKey = $this->_generateCacheFileName($iIdUser);
-		$oApiFileCache = /* @var $oApiFileCache \CApiFilecacheManager */\CApi::GetSystemManager('filecache');
-		$oApiUsers = /* @var $oApiUsers \CApiUsersManager */\CApi::GetSystemManager('users');
+		$oApiFileCache = /* @var $oApiFileCache \CApiFilecacheManager */\Aurora\System\Api::GetSystemManager('filecache');
+		$oApiUsers = /* @var $oApiUsers \CApiUsersManager */\Aurora\System\Api::GetSystemManager('users');
 		
 		if ($oApiFileCache && $oApiUsers && !empty($sCacheKey))
 		{
@@ -68,7 +68,7 @@ class CApiVoiceManager extends AApiManager
 			if ($oAccount)
 			{
 				$oApiFileCache->clear($oAccount, $sCacheKey);
-				CApi::Log('Cache: clear contacts names cache');
+				\Aurora\System\Api::Log('Cache: clear contacts names cache');
 			}
 		}
 	}
@@ -82,13 +82,13 @@ class CApiVoiceManager extends AApiManager
 	public function getNamesByCallersNumbers($oAccount, $aNumbers, $bUseCache = true)
 	{
 		$mResult = false;
-		$oApiContactsManager =\CApi::Manager('contactsmain');
+		$oApiContactsManager =\Aurora\System\Api::Manager('contactsmain');
 		if (is_array($aNumbers) && 0 < count($aNumbers) && $oAccount && $oApiContactsManager)
 		{
 			$bFromCache = false;
 			$sCacheKey = '';
 			$mNamesResult = null;
-			$oApiFileCache = $bUseCache ? /* @var $oApiFileCache \CApiFilecacheManager */\CApi::GetSystemManager('filecache') : false;
+			$oApiFileCache = $bUseCache ? /* @var $oApiFileCache \CApiFilecacheManager */\Aurora\System\Api::GetSystemManager('filecache') : false;
 			if ($oApiFileCache)
 			{
 				$sCacheKey = $this->_generateCacheFileName($oAccount->IdUser);
@@ -105,7 +105,7 @@ class CApiVoiceManager extends AApiManager
 						else
 						{
 							$bFromCache = true;
-							CApi::Log('Cache: get contacts names from cache (count:'.count($mNamesResult).')');
+							\Aurora\System\Api::Log('Cache: get contacts names from cache (count:'.count($mNamesResult).')');
 						}
 					}
 				}
@@ -121,13 +121,13 @@ class CApiVoiceManager extends AApiManager
 				if (!$bFromCache && $oApiFileCache && 0 < strlen($sCacheKey))
 				{
 					$oApiFileCache->put($oAccount, $sCacheKey, @json_encode($mNamesResult));
-					CApi::Log('Cache: save contacts names to cache (count:'.count($mNamesResult).')');
+					\Aurora\System\Api::Log('Cache: save contacts names to cache (count:'.count($mNamesResult).')');
 				}
 
 				$aNormNumbers = array();
 				foreach ($aNumbers as $sNumber)
 				{
-					$aNormNumbers[$sNumber] = api_Utils::ClearPhone($sNumber);
+					$aNormNumbers[$sNumber] = \Aurora\System\Utils::ClearPhone($sNumber);
 				}
 
 				foreach ($aNormNumbers as $sInputNumber => $sClearNumber)

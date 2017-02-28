@@ -2,7 +2,7 @@
 
 namespace Aurora\Modules;
 
-class TwilioModule extends \AApiModule
+class TwilioModule extends \Aurora\System\AbstractModule
 {
 	public function init() 
 	{
@@ -31,9 +31,9 @@ class TwilioModule extends \AApiModule
 	public function getTwiML()
 	{
 		$aPaths = \System\Service::GetPaths();
-		$oApiCapability = \CApi::GetSystemManager('capability');
-		$oApiUsers = \CApi::GetSystemManager('users');
-		$oApiTenants = \CApi::GetSystemManager('tenants');
+		$oApiCapability = \Aurora\System\Api::GetSystemManager('capability');
+		$oApiUsers = \Aurora\System\Api::GetSystemManager('users');
+		$oApiTenants = \Aurora\System\Api::GetSystemManager('tenants');
 
 		$sTenantId = isset($aPaths[1]) ? $aPaths[1] : null;
 		$oTenant = null;
@@ -110,15 +110,15 @@ class TwilioModule extends \AApiModule
 
 		$aResult[] = '</Response>';
 
-		\CApi::LogObject('twilio_xml_start');
-		\CApi::LogObject($aPaths);
-		\CApi::LogObject($_REQUEST);
-		\CApi::LogObject($aTwilioNumbers);
-		\CApi::LogObject($aResult);
-		\CApi::LogObject('twilio_From-'.$sFrom);
-		\CApi::LogObject('twilio_TwilioPhoneNumber-'.$oTenant->TwilioPhoneNumber);
-		\CApi::LogObject('twilio_TwilioAllow-'.$oTenant->TwilioAllow);
-		\CApi::LogObject('twilio_xml_end');
+		\Aurora\System\Api::LogObject('twilio_xml_start');
+		\Aurora\System\Api::LogObject($aPaths);
+		\Aurora\System\Api::LogObject($_REQUEST);
+		\Aurora\System\Api::LogObject($aTwilioNumbers);
+		\Aurora\System\Api::LogObject($aResult);
+		\Aurora\System\Api::LogObject('twilio_From-'.$sFrom);
+		\Aurora\System\Api::LogObject('twilio_TwilioPhoneNumber-'.$oTenant->TwilioPhoneNumber);
+		\Aurora\System\Api::LogObject('twilio_TwilioAllow-'.$oTenant->TwilioAllow);
+		\Aurora\System\Api::LogObject('twilio_xml_end');
 
 		//return implode("\r\n", $aResult);
 		return \implode('', $aResult);
@@ -166,12 +166,12 @@ class TwilioModule extends \AApiModule
 	 */
 	public function GetToken()
 	{
-		\CApi::checkUserRoleIsAtLeast(\EUserRole::Anonymous);
+		\Aurora\System\Api::checkUserRoleIsAtLeast(\EUserRole::Anonymous);
 		
 		return false; // TODO:
 		$oAccount = $this->getAccountFromParam();
 
-		$oApiTenants = \CApi::GetSystemManager('tenants');
+		$oApiTenants = \Aurora\System\Api::GetSystemManager('tenants');
 		$oTenant = (0 < $oAccount->IdTenant) ? $oApiTenants->getTenantById($oAccount->IdTenant) : $oApiTenants->getDefaultGlobalTenant();
 		
 		$mToken = false;
@@ -193,15 +193,15 @@ class TwilioModule extends \AApiModule
 				$oCapability = new \Services_Twilio_Capability($sAccountSid, $sAuthToken);
 				$oCapability->allowClientOutgoing($sAppSid);
 
-				\CApi::Log('twilio_debug');
-				\CApi::Log('twilio_account_sid-' . $sAccountSid);
-				\CApi::Log('twilio_auth_token-' . $sAuthToken);
-				\CApi::Log('twilio_app_sid-' . $sAppSid);
-				\CApi::Log('twilio_enable-' . $bUserTwilioEnable ? 'true' : 'false');
-				\CApi::Log('twilio_user_default_number-' . ($bUserDefaultNumber ? 'true' : 'false'));
-				\CApi::Log('twilio_number-' . $sTwilioPhoneNumber);
-				\CApi::Log('twilio_user_number-' . $sUserPhoneNumber);
-				\CApi::Log('twilio_debug_end');
+				\Aurora\System\Api::Log('twilio_debug');
+				\Aurora\System\Api::Log('twilio_account_sid-' . $sAccountSid);
+				\Aurora\System\Api::Log('twilio_auth_token-' . $sAuthToken);
+				\Aurora\System\Api::Log('twilio_app_sid-' . $sAppSid);
+				\Aurora\System\Api::Log('twilio_enable-' . $bUserTwilioEnable ? 'true' : 'false');
+				\Aurora\System\Api::Log('twilio_user_default_number-' . ($bUserDefaultNumber ? 'true' : 'false'));
+				\Aurora\System\Api::Log('twilio_number-' . $sTwilioPhoneNumber);
+				\Aurora\System\Api::Log('twilio_user_number-' . $sUserPhoneNumber);
+				\Aurora\System\Api::Log('twilio_debug_end');
 
 				//$oCapability->allowClientIncoming('TwilioAftId_'.$oAccount->IdTenant.'_'.$oAccount->User->TwilioNumber);
 
@@ -221,7 +221,7 @@ class TwilioModule extends \AApiModule
 			}
 			catch (\Exception $oE)
 			{
-				\CApi::LogException($oE);
+				\Aurora\System\Api::LogException($oE);
 			}
 		}
 		else
@@ -237,7 +237,7 @@ class TwilioModule extends \AApiModule
 	 */
 	public function GetLogs()
 	{
-		\CApi::checkUserRoleIsAtLeast(\EUserRole::Anonymous);
+		\Aurora\System\Api::checkUserRoleIsAtLeast(\EUserRole::Anonymous);
 		
 		return array(); // TODO:
 		
@@ -245,7 +245,7 @@ class TwilioModule extends \AApiModule
 
 		$bTwilioEnable = $oAccount->User->TwilioEnable;
 
-		$oApiTenants = \CApi::GetSystemManager('tenants');
+		$oApiTenants = \Aurora\System\Api::GetSystemManager('tenants');
 		$oTenant = (0 < $oAccount->IdTenant) ? $oApiTenants->getTenantById($oAccount->IdTenant) :
 			$this->oApiTenants->getDefaultGlobalTenant();
 
@@ -337,7 +337,7 @@ class TwilioModule extends \AApiModule
 						$aNumbers[] = $call->from_formatted;
 					}
 
-					$oApiVoiceManager = \CApi::Manager('voice');
+					$oApiVoiceManager = \Aurora\System\Api::Manager('voice');
 
 					if ($aResult && $oApiVoiceManager) {
 
@@ -359,7 +359,7 @@ class TwilioModule extends \AApiModule
 			}
 			catch (\Exception $oE)
 			{
-				\CApi::LogException($oE);
+				\Aurora\System\Api::LogException($oE);
 			}
 		}
 		else
