@@ -30,7 +30,7 @@ class TwilioModule extends \Aurora\System\AbstractModule
 
 	public function getTwiML()
 	{
-		$aPaths = \System\Service::GetPaths();
+		$aPaths = \Aurora\System\Service::GetPaths();
 		$oApiCapability = \Aurora\System\Api::GetSystemManager('capability');
 		$oApiUsers = \Aurora\System\Api::GetSystemManager('users');
 		$oApiTenants = \Aurora\System\Api::GetSystemManager('tenants');
@@ -226,7 +226,7 @@ class TwilioModule extends \Aurora\System\AbstractModule
 		}
 		else
 		{
-			throw new \System\Exceptions\AuroraApiException(\System\Notifications::VoiceNotAllowed);
+			throw new \System\Exceptions\ApiException(\System\Notifications::VoiceNotAllowed);
 		}
 
 		return $mToken;
@@ -364,7 +364,7 @@ class TwilioModule extends \Aurora\System\AbstractModule
 		}
 		else
 		{
-			throw new \System\Exceptions\AuroraApiException(\System\Notifications::VoiceNotAllowed);
+			throw new \System\Exceptions\ApiException(\System\Notifications::VoiceNotAllowed);
 		}
 
 		return $aResult;
