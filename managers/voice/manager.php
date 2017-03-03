@@ -60,7 +60,7 @@ class CApiVoiceManager extends \Aurora\System\AbstractManager
 	{
 		$sCacheKey = $this->_generateCacheFileName($iIdUser);
 		$oApiFileCache = /* @var $oApiFileCache \CApiFilecacheManager */\Aurora\System\Api::GetSystemManager('filecache');
-		$oApiUsers = /* @var $oApiUsers \CApiUsersManager */\Aurora\System\Api::GetSystemManager('users');
+//		$oApiUsers = /* @var $oApiUsers \CApiUsersManager */\Aurora\System\Api::GetSystemManager('users');
 		
 		if ($oApiFileCache && $oApiUsers && !empty($sCacheKey))
 		{

@@ -2,7 +2,7 @@
 
 namespace Aurora\Modules;
 
-class TwilioModule extends \Aurora\System\AbstractModule
+class TwilioModule extends \Aurora\System\Module\AbstractModule
 {
 	public function init() 
 	{
@@ -32,8 +32,8 @@ class TwilioModule extends \Aurora\System\AbstractModule
 	{
 		$aPaths = \Aurora\System\Service::GetPaths();
 		$oApiCapability = \Aurora\System\Api::GetSystemManager('capability');
-		$oApiUsers = \Aurora\System\Api::GetSystemManager('users');
-		$oApiTenants = \Aurora\System\Api::GetSystemManager('tenants');
+//		$oApiUsers = \Aurora\System\Api::GetSystemManager('users');
+//		$oApiTenants = \Aurora\System\Api::GetSystemManager('tenants');
 
 		$sTenantId = isset($aPaths[1]) ? $aPaths[1] : null;
 		$oTenant = null;
@@ -171,7 +171,7 @@ class TwilioModule extends \Aurora\System\AbstractModule
 		return false; // TODO:
 		$oAccount = $this->getAccountFromParam();
 
-		$oApiTenants = \Aurora\System\Api::GetSystemManager('tenants');
+//		$oApiTenants = \Aurora\System\Api::GetSystemManager('tenants');
 		$oTenant = (0 < $oAccount->IdTenant) ? $oApiTenants->getTenantById($oAccount->IdTenant) : $oApiTenants->getDefaultGlobalTenant();
 		
 		$mToken = false;
@@ -226,7 +226,7 @@ class TwilioModule extends \Aurora\System\AbstractModule
 		}
 		else
 		{
-			throw new \System\Exceptions\ApiException(\System\Notifications::VoiceNotAllowed);
+			throw new \Aurora\System\Exceptions\ApiException(\Aurora\System\Notifications::VoiceNotAllowed);
 		}
 
 		return $mToken;
@@ -245,7 +245,7 @@ class TwilioModule extends \Aurora\System\AbstractModule
 
 		$bTwilioEnable = $oAccount->User->TwilioEnable;
 
-		$oApiTenants = \Aurora\System\Api::GetSystemManager('tenants');
+//		$oApiTenants = \Aurora\System\Api::GetSystemManager('tenants');
 		$oTenant = (0 < $oAccount->IdTenant) ? $oApiTenants->getTenantById($oAccount->IdTenant) :
 			$this->oApiTenants->getDefaultGlobalTenant();
 
@@ -364,7 +364,7 @@ class TwilioModule extends \Aurora\System\AbstractModule
 		}
 		else
 		{
-			throw new \System\Exceptions\ApiException(\System\Notifications::VoiceNotAllowed);
+			throw new \Aurora\System\Exceptions\ApiException(\Aurora\System\Notifications::VoiceNotAllowed);
 		}
 
 		return $aResult;
