@@ -30,7 +30,7 @@ class TwilioModule extends \Aurora\System\Module\AbstractModule
 
 	public function getTwiML()
 	{
-		$aPaths = \Aurora\System\Service::GetPaths();
+		$aPaths = \Aurora\System\Application::GetPaths();
 		$oApiCapability = \Aurora\System\Api::GetSystemManager('capability');
 //		$oApiUsers = \Aurora\System\Api::GetSystemManager('users');
 //		$oApiTenants = \Aurora\System\Api::GetSystemManager('tenants');
