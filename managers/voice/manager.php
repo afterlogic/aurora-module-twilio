@@ -59,7 +59,7 @@ class CApiVoiceManager extends \Aurora\System\Managers\AbstractManager
 	public function flushCallersNumbersCache($iIdUser)
 	{
 		$sCacheKey = $this->_generateCacheFileName($iIdUser);
-		$oApiFileCache = /* @var $oApiFileCache \CApiFilecacheManager */\Aurora\System\Api::GetSystemManager('Filecache');
+		$oApiFileCache = /* @var $oApiFileCache \Aurora\System\Managers\Filecache\Manager */\Aurora\System\Api::GetSystemManager('Filecache');
 //		$oApiUsers = /* @var $oApiUsers \CApiUsersManager */\Aurora\System\Api::GetSystemManager('users');
 		
 		if ($oApiFileCache && $oApiUsers && !empty($sCacheKey))
@@ -88,7 +88,7 @@ class CApiVoiceManager extends \Aurora\System\Managers\AbstractManager
 			$bFromCache = false;
 			$sCacheKey = '';
 			$mNamesResult = null;
-			$oApiFileCache = $bUseCache ? /* @var $oApiFileCache \CApiFilecacheManager */\Aurora\System\Api::GetSystemManager('Filecache') : false;
+			$oApiFileCache = $bUseCache ? /* @var $oApiFileCache \Aurora\System\Managers\Filecache\Manager */\Aurora\System\Api::GetSystemManager('Filecache') : false;
 			if ($oApiFileCache)
 			{
 				$sCacheKey = $this->_generateCacheFileName($oAccount->IdUser);
