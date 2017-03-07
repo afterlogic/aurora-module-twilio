@@ -21,7 +21,7 @@
 /**
  * @package Voice
  */
-class CApiVoiceManager extends \Aurora\System\AbstractManager
+class CApiVoiceManager extends \Aurora\System\Managers\AbstractManager
 {
 	/**
 	 * @var $oApiContactsManager CApiContactsContactsManager
@@ -34,9 +34,9 @@ class CApiVoiceManager extends \Aurora\System\AbstractManager
 	private $oApiGContactsManager;
 
 	/**
-	 * @param \Aurora\System\GlobalManager &$oManager
+	 * @param \Aurora\System\Managers\GlobalManager &$oManager
 	 */
-	public function __construct(\Aurora\System\GlobalManager &$oManager, $sForcedStorage = '')
+	public function __construct(\Aurora\System\Managers\GlobalManager &$oManager, $sForcedStorage = '')
 	{
 		parent::__construct('voice', $oManager);
 
