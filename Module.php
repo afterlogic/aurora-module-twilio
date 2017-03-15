@@ -30,12 +30,12 @@ class Module extends \Aurora\System\Module\AbstractModule
 
 	public function getTwiML()
 	{
-		$aPaths = \Aurora\System\Application::GetPaths();
 		$oApiCapability = \Aurora\System\Api::GetSystemManager('capability');
 //		$oApiUsers = \Aurora\System\Api::GetSystemManager('users');
 //		$oApiTenants = \Aurora\System\Api::GetSystemManager('tenants');
 
-		$sTenantId = isset($aPaths[1]) ? $aPaths[1] : null;
+		$sTenantId = \Aurora\System\Application::GetPathItemByIndex(1);
+		
 		$oTenant = null;
 		if ($oApiTenants)
 		{
@@ -111,7 +111,6 @@ class Module extends \Aurora\System\Module\AbstractModule
 		$aResult[] = '</Response>';
 
 		\Aurora\System\Api::LogObject('twilio_xml_start');
-		\Aurora\System\Api::LogObject($aPaths);
 		\Aurora\System\Api::LogObject($_REQUEST);
 		\Aurora\System\Api::LogObject($aTwilioNumbers);
 		\Aurora\System\Api::LogObject($aResult);
