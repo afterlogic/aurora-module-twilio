@@ -176,7 +176,7 @@ class Module extends \Aurora\System\Module\AbstractModule
 	 */
 	public function GetToken()
 	{
-		\Aurora\System\Api::checkUserRoleIsAtLeast(\EUserRole::Anonymous);
+		\Aurora\System\Api::checkUserRoleIsAtLeast(\Aurora\System\Enums\UserRole::Anonymous);
 		
 		return false; // TODO:
 		$oAccount = $this->getAccountFromParam();
@@ -247,7 +247,7 @@ class Module extends \Aurora\System\Module\AbstractModule
 	 */
 	public function GetLogs()
 	{
-		\Aurora\System\Api::checkUserRoleIsAtLeast(\EUserRole::Anonymous);
+		\Aurora\System\Api::checkUserRoleIsAtLeast(\Aurora\System\Enums\UserRole::Anonymous);
 		
 		return array(); // TODO:
 		
