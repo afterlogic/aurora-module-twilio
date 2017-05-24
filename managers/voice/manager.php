@@ -23,12 +23,9 @@ class CApiVoiceManager extends \Aurora\System\Managers\AbstractManager
 	 */
 	private $oApiGContactsManager;
 
-	/**
-	 * @param \Aurora\System\Managers\GlobalManager &$oManager
-	 */
-	public function __construct(\Aurora\System\Managers\GlobalManager &$oManager, $sForcedStorage = '')
+	public function __construct($sForcedStorage = '')
 	{
-		parent::__construct('voice', $oManager);
+		parent::__construct('voice');
 
 		$this->oApiContactsManager =\Aurora\System\Api::Manager('contactsmain');
 		$this->oApiGContactsManager =\Aurora\System\Api::Manager('gcontacts');
