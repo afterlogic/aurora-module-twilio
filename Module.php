@@ -185,7 +185,7 @@ class Module extends \Aurora\System\Module\AbstractModule
 		$oTenant = (0 < $oAccount->IdTenant) ? $oApiTenants->getTenantById($oAccount->IdTenant) : $oApiTenants->getDefaultGlobalTenant();
 		
 		$mToken = false;
-		if ($oTenant && $this->oApiCapabilityManager->isTwilioSupported($oAccount) && $oTenant->isTwilioSupported() && $oTenant->TwilioAllow && $oAccount->User->TwilioEnable && file_exists(AURORA_APP_ROOT_PATH.'libraries/Services/Twilio.php'))
+		if ($oTenant && $oTenant->isTwilioSupported() && $oTenant->TwilioAllow && $oAccount->User->TwilioEnable && file_exists(AURORA_APP_ROOT_PATH.'libraries/Services/Twilio.php'))
 		{
 			try
 			{
@@ -259,7 +259,7 @@ class Module extends \Aurora\System\Module\AbstractModule
 		$oTenant = (0 < $oAccount->IdTenant) ? $oApiTenants->getTenantById($oAccount->IdTenant) :
 			$this->oApiTenants->getDefaultGlobalTenant();
 
-		if ($oTenant && $this->oApiCapabilityManager->isTwilioSupported($oAccount) && $oTenant->isTwilioSupported())
+		if ($oTenant && $oTenant->isTwilioSupported())
 		{
 			try
 			{
