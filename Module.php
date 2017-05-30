@@ -41,7 +41,6 @@ class Module extends \Aurora\System\Module\AbstractModule
 
 	public function getTwiML()
 	{
-		$oApiCapability = \Aurora\System\Api::GetSystemManager('capability');
 //		$oApiUsers = \Aurora\System\Api::GetSystemManager('users');
 //		$oApiTenants = \Aurora\System\Api::GetSystemManager('tenants');
 
