@@ -184,7 +184,7 @@ class Module extends \Aurora\System\Module\AbstractModule
 		$oTenant = (0 < $oAccount->IdTenant) ? $oApiTenants->getTenantById($oAccount->IdTenant) : $oApiTenants->getDefaultGlobalTenant();
 		
 		$mToken = false;
-		if ($oTenant && $oTenant->isTwilioSupported() && $oTenant->TwilioAllow && $oAccount->User->TwilioEnable && file_exists(AURORA_APP_ROOT_PATH.'libraries/Services/Twilio.php'))
+		if ($oTenant && $oTenant->isTwilioSupported() && $oTenant->TwilioAllow && $oAccount->User->TwilioEnable && file_exists(AU_APP_ROOT_PATH.'libraries/Services/Twilio.php'))
 		{
 			try
 			{
@@ -262,7 +262,7 @@ class Module extends \Aurora\System\Module\AbstractModule
 		{
 			try
 			{
-				include AURORA_APP_ROOT_PATH.'libraries/Services/Twilio.php';
+				include AU_APP_ROOT_PATH.'libraries/Services/Twilio.php';
 
 				$sStatus = (string) $this->getParamValue('Status', '');
 				$sStartTime = (string) $this->getParamValue('StartTime', '');
