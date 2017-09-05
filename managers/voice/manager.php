@@ -61,7 +61,7 @@ class CApiVoiceManager extends \Aurora\System\Managers\AbstractManager
 	}
 
 	/**
-	 * @param CAccount $oAccount
+	 * @param \Aurora\Modules\StandardAuth\Classes\Account $oAccount
 	 * @param array $aNumbers
 	 * @param bool $bUseCache = true
 	 * @return array
