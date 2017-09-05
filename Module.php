@@ -29,7 +29,7 @@ class Module extends \Aurora\System\Module\AbstractModule
 			)
 		);
 		
-		$this->extendObject('CUser', array(
+		$this->extendObject('\Aurora\Modules\Core\Clases\CUser', array(
 				'TwilioEnable'						=> array('bool', true), //'twilio_enable'),
 				'TwilioNumber'						=> array('string', ''), //'twilio_number'),
 				'TwilioDefaultNumber'				=> array('bool', false), //'twilio_default_number'),
