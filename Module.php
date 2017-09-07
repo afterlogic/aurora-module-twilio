@@ -19,7 +19,9 @@ class Module extends \Aurora\System\Module\AbstractModule
 	{
 		parent::init();
 		
-		$this->extendObject('Aurora\Modules\Core\Classes\Tenant', array(
+		$this->extendObject(
+			'Aurora\Modules\Core\Classes\Tenant', 
+			array(
 				'TwilioAllow'				=> array('bool', !!$this->GetConfig('Allow'), false), //, 
 				'TwilioAllowConfiguration'	=> array('bool', false),
 				'TwilioPhoneNumber'			=> array('string', (string) $this->GetConfig('PhoneNumber'), false),
@@ -29,7 +31,9 @@ class Module extends \Aurora\System\Module\AbstractModule
 			)
 		);
 		
-		$this->extendObject('Aurora\Modules\Core\Classes\User', array(
+		$this->extendObject(
+			'Aurora\Modules\Core\Classes\User', 
+			array(
 				'TwilioEnable'						=> array('bool', true), //'twilio_enable'),
 				'TwilioNumber'						=> array('string', ''), //'twilio_number'),
 				'TwilioDefaultNumber'				=> array('bool', false), //'twilio_default_number'),
@@ -184,7 +188,7 @@ class Module extends \Aurora\System\Module\AbstractModule
 		$oTenant = (0 < $oAccount->IdTenant) ? $oApiTenants->getTenantById($oAccount->IdTenant) : $oApiTenants->getDefaultGlobalTenant();
 		
 		$mToken = false;
-		if ($oTenant && $oTenant->isTwilioSupported() && $oTenant->TwilioAllow && $oAccount->User->TwilioEnable && file_exists(AU_APP_ROOT_PATH.'libraries/Services/Twilio.php'))
+		if ($oTenant && $oTenant->isTwilioSupported() && $oTenant->TwilioAllow && $oAccount->User->TwilioEnable)
 		{
 			try
 			{
@@ -262,8 +266,6 @@ class Module extends \Aurora\System\Module\AbstractModule
 		{
 			try
 			{
-				include AU_APP_ROOT_PATH.'libraries/Services/Twilio.php';
-
 				$sStatus = (string) $this->getParamValue('Status', '');
 				$sStartTime = (string) $this->getParamValue('StartTime', '');
 
