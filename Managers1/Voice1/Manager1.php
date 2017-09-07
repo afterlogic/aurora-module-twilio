@@ -8,10 +8,12 @@
  * For full statements of the licenses see LICENSE-AFTERLOGIC and LICENSE-AGPL3 files.
  */
 
+namespace Aurora\Modules\Twilio\Managers\Voice;
+
 /**
  * @package Voice
  */
-class CApiVoiceManager extends \Aurora\System\Managers\AbstractManager
+class Manager extends \Aurora\System\Managers\AbstractManager
 {
 	/**
 	 * @var $oApiContactsManager CApiContactsContactsManager
