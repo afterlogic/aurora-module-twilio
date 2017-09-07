@@ -19,7 +19,7 @@ class Module extends \Aurora\System\Module\AbstractModule
 	{
 		parent::init();
 		
-		$this->extendObject('CTenant', array(
+		$this->extendObject('Aurora\Modules\Core\Classes\Tenant', array(
 				'TwilioAllow'				=> array('bool', !!$this->GetConfig('Allow'), false), //, 
 				'TwilioAllowConfiguration'	=> array('bool', false),
 				'TwilioPhoneNumber'			=> array('string', (string) $this->GetConfig('PhoneNumber'), false),
