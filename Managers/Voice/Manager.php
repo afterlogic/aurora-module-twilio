@@ -56,7 +56,7 @@ class Manager extends \Aurora\System\Managers\AbstractManager
 			$oAccount = $oApiUsers->getDefaultAccount($iIdUser);
 			if ($oAccount)
 			{
-				$oApiFileCache->clear($oAccount, $sCacheKey);
+				$oApiFileCache->clear($oAccount, $sCacheKey, '', 'Twilio');
 				\Aurora\System\Api::Log('Cache: clear contacts names cache');
 			}
 		}
@@ -83,7 +83,7 @@ class Manager extends \Aurora\System\Managers\AbstractManager
 				$sCacheKey = $this->_generateCacheFileName($oAccount->IdUser);
 				if (!empty($sCacheKey))
 				{
-					$sData = $oApiFileCache->get($oAccount, $sCacheKey);
+					$sData = $oApiFileCache->get($oAccount, $sCacheKey, '', 'Twilio');
 					if (!empty($sData))
 					{
 						$mNamesResult = @json_decode($sData, true);
@@ -109,7 +109,7 @@ class Manager extends \Aurora\System\Managers\AbstractManager
 			{
 				if (!$bFromCache && $oApiFileCache && 0 < strlen($sCacheKey))
 				{
-					$oApiFileCache->put($oAccount, $sCacheKey, @json_encode($mNamesResult));
+					$oApiFileCache->put($oAccount, $sCacheKey, @json_encode($mNamesResult), '', 'Twilio');
 					\Aurora\System\Api::Log('Cache: save contacts names to cache (count:'.count($mNamesResult).')');
 				}
 
