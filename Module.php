@@ -83,15 +83,12 @@ class Module extends \Aurora\System\Module\AbstractModule
 					$aResult[] = '<Dial callerId="'.$sFrom.'">'.$sTo.'</Dial>';
 				}
 
-				//@setcookie('twilioCall['.$oHttp->GetRequest('CallSid').']', $sTo, time()+60);
-				@\setcookie('PhoneNumber', $sTo);
+				@\setcookie('PhoneNumber', $sTo, \strtotime('+30 days'), \Aurora\System\Api::getCookiePath());
 			}
 			else //call from other systems or internal call second occurrence
 			{
 				if ($oTenant->TwilioAccountSID === $this->oHttp->GetRequest('AccountSid') && $oTenant->TwilioAppSID === $this->oHttp->GetRequest('ApplicationSid')) //internal call second occurrence
 				{
-					/*$sTo = isset($_COOKIE['twilioCall'][$oHttp->GetRequest('CallSid')]) ? $_COOKIE['twilioCall'][$oHttp->GetRequest('CallSid')] : '';
-					@setcookie ('twilioCall['.$oHttp->GetRequest('CallSid').']', '', time() - 1);*/
 					if (\strlen($sTo) > 0 && \strlen($sTo) < 10) //to internal number
 					{
 						$aResult[] = '<Dial callerId="'.$sFrom.'"><Client>'.$sTo.'</Client></Dial>';
