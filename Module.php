@@ -18,28 +18,26 @@ class Module extends \Aurora\System\Module\AbstractModule
 {
 	public function init() 
 	{
-		parent::init();
-		
-		$this->extendObject(
-			'Aurora\Modules\Core\Classes\Tenant', 
-			array(
+		\Aurora\Modules\Core\Classes\Tenant::extend(
+			self::GetName(),
+			[
 				'TwilioAllow'				=> array('bool', !!$this->GetConfig('Allow'), false), //, 
 				'TwilioAllowConfiguration'	=> array('bool', false),
 				'TwilioPhoneNumber'			=> array('string', (string) $this->GetConfig('PhoneNumber'), false),
 				'TwilioAccountSID'			=> array('string', (string) $this->GetConfig('AccountSID'), false),
 				'TwilioAuthToken'			=> array('string', (string) $this->GetConfig('AuthToken'), false),
 				'TwilioAppSID'				=> array('string', (string) $this->GetConfig('AppSID'), false)
-			)
-		);
+			]
+		);		
 		
-		$this->extendObject(
-			'Aurora\Modules\Core\Classes\User', 
-			array(
+		\Aurora\Modules\Core\Classes\User::extend(
+			self::GetName(),
+			[
 				'TwilioEnable'						=> array('bool', true), //'twilio_enable'),
 				'TwilioNumber'						=> array('string', ''), //'twilio_number'),
 				'TwilioDefaultNumber'				=> array('bool', false), //'twilio_default_number'),
-			)
-		);
+			]
+		);		
 		
 		$this->AddEntry('twilio', 'getTwiML');
 	}
