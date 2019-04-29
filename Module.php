@@ -49,7 +49,7 @@ class Module extends \Aurora\System\Module\AbstractModule
 //		$oApiUsers = \Aurora\System\Api::GetSystemManager('users');
 //		$oApiTenants = \Aurora\System\Api::GetSystemManager('tenants');
 
-		$sTenantId = \Aurora\System\Application::GetPathItemByIndex(1);
+		$sTenantId = \Aurora\System\Router::getItemByIndex(1);
 		
 		$oTenant = null;
 		if ($oApiTenants)
