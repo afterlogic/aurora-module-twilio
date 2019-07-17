@@ -83,7 +83,8 @@ class Module extends \Aurora\System\Module\AbstractModule
 					$aResult[] = '<Dial callerId="'.$sFrom.'">'.$sTo.'</Dial>';
 				}
 
-				@\setcookie('PhoneNumber', $sTo, \strtotime('+30 days'), \Aurora\System\Api::getCookiePath());
+				@\setcookie('PhoneNumber', $sTo, \strtotime('+30 days'), \Aurora\System\Api::getCookiePath(), 
+						null, \Aurora\System\Api::getCookieSecure());
 			}
 			else //call from other systems or internal call second occurrence
 			{
